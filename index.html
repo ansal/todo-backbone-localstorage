@@ -12,7 +12,7 @@
 </head>
 <body>
 
-  <div class="container">
+  <div class="container" id="app">
     <div class="row">
       <div class="col-md-12">
         <h2>
@@ -21,7 +21,7 @@
         </h2>
         <a href="https://github.com/ansal/todo-backbone-localstorage"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
         <hr>
-        <input type="text" class="form-control" placeholder="Type a new TODO and hit Enter...">
+        <input type="text" class="form-control" placeholder="Type a new TODO and hit Enter..." id="newTodoText">
         <hr>
       </div> <!-- col-md-12 ends -->
     </div> <!-- row ends -->
@@ -32,7 +32,7 @@
           <small>6 todos pending.</small>
         </h4>
         <hr>
-        <ul class="todos">
+        <ul class="todos" id="nonCompletedTodos">
           
         </ul>
       </div> <!-- col-md-6 ends -->
@@ -42,7 +42,7 @@
           <small>6 todos completed.</small>
         </h4>
         <hr>
-        <ul class="todos">
+        <ul class="todos" id="completedTodos">
           
         </ul>
         <p class="pull-right">
@@ -67,6 +67,7 @@
   <!-- app specific scripts -->
   <script src="models/todo.js"></script>
   <script src="collections/todo.js"></script>
+  <script src="views/main.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
