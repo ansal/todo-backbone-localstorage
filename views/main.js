@@ -43,7 +43,7 @@ var app = app || {};
     },
 
     addOne: function(todo) {
-      var view = app.TodoView({model: todo});
+      var view = new app.TodoView({model: todo});
       if(todo.completed) {
         this.$completedTodos.append(view.render().el);
       } else {
