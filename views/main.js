@@ -15,7 +15,22 @@ var app = app || {};
     },
 
     initialize: function() {
+
+      // cache dom elements
+
       this.$newTodoText = this.$('#newTodoText');
+      this.$remainingTodos = this.$('#remainingTodos');
+      this.$completedTodos = this.$('#completedTodos');
+
+      // listen to events
+      this.listenTo(app.Todos, 'add', this.addOne);
+      this.listenTo(app.Todos, 'reset', this.addAll);
+
+    },
+
+    render: function() {
+      var completed = app.Todos.completed().length;
+      var remaining = app.Todos.remaining().length;
     },
 
     createOnEnter: function(e) {
@@ -25,6 +40,21 @@ var app = app || {};
         });
         this.$newTodoText.val('');
       }
+    },
+
+    addOne: function(todo) {
+      var view = app.TodoView({model: todo});
+      if(todo.completed) {
+        this.$completedTodos.append(view.render().el);
+      } else {
+        this.$remainingTodos.append(view.render().el);
+      }
+    },
+
+    addAll: function() {
+      this.$remainingTodos.html('');
+      this.$completedTodos.html('');
+      app.Todos.each(this.addOne, this);
     }
 
   });

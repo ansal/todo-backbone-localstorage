@@ -9,4 +9,6 @@ $(function(){
   // create the main view
   new app.AppView();
 
+  // fetch the models
+  app.Todos.fetch({ reset : true });
 });
