@@ -26,7 +26,7 @@ var app = app || {};
       // listen to events
       this.listenTo(app.Todos, 'add', this.addOne);
       this.listenTo(app.Todos, 'reset', this.addAll);
-      this.listenTo(app.Todos, 'change', this.render);
+      this.listenTo(app.Todos, 'change remove', this.render);
 
     },
 
