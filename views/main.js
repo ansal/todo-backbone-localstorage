@@ -19,18 +19,19 @@ var app = app || {};
       // cache dom elements
 
       this.$newTodoText = this.$('#newTodoText');
-      this.$remainingTodos = this.$('#remainingTodos');
-      this.$completedTodos = this.$('#completedTodos');
+      this.$todoList = this.$('#todoList');
+      this.$remainingTodosCount = this.$('#remainingTodosCount');
+      this.$completedTodosCount = this.$('#completedTodosCount');
 
       // listen to events
       this.listenTo(app.Todos, 'add', this.addOne);
       this.listenTo(app.Todos, 'reset', this.addAll);
+      this.listenTo(app.Todos, 'change', this.render);
 
     },
 
     render: function() {
-      var completed = app.Todos.completed().length;
-      var remaining = app.Todos.remaining().length;
+      this.showTodoCount();
     },
 
     createOnEnter: function(e) {
@@ -44,17 +45,22 @@ var app = app || {};
 
     addOne: function(todo) {
       var view = new app.TodoView({model: todo});
-      if(todo.completed) {
-        this.$completedTodos.append(view.render().el);
-      } else {
-        this.$remainingTodos.append(view.render().el);
-      }
+      this.$todoList.append(view.render().el);
     },
 
     addAll: function() {
-      this.$remainingTodos.html('');
-      this.$completedTodos.html('');
+      this.$todoList.html('');
       app.Todos.each(this.addOne, this);
+
+      // show todo counts
+      this.showTodoCount();
+    },
+
+    showTodoCount: function() {
+      var completed = app.Todos.completed().length;
+      var remaining = app.Todos.remaining().length;
+      this.$remainingTodosCount.text(remaining);
+      this.$completedTodosCount.text(completed);
     }
 
   });

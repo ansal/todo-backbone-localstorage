@@ -7,7 +7,7 @@ var ENTER_KEY = 13;
 $(function(){
 
   // create the main view
-  new app.AppView();
+  app.appView = new app.AppView();
 
   // fetch the models
   app.Todos.fetch({ reset : true });
