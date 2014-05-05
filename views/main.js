@@ -11,7 +11,8 @@ var app = app || {};
     el : '#app',
 
     events : {
-      'keyup #newTodoText': 'createOnEnter'
+      'keyup #newTodoText': 'createOnEnter',
+      'click #clearCompletedTasks': 'clearCompletedTasks'
     },
 
     initialize: function() {
@@ -61,6 +62,15 @@ var app = app || {};
       var remaining = app.Todos.remaining().length;
       this.$remainingTodosCount.text(remaining);
       this.$completedTodosCount.text(completed);
+    },
+
+    clearCompletedTasks: function(e) {
+      e.preventDefault();
+      var completed = app.Todos.completed();
+      var confirmation = confirm('This will delete ' + completed.length + ' todos. Continue?');
+      if(confirmation) {
+        _.invoke(app.Todos.completed(), 'destroy');
+      }
     }
 
   });
